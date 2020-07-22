@@ -1,7 +1,7 @@
-name: Build and Deploy
+name: GitHub Actions Build and Deploy Demo
 on:
-  push:	
-    branches:	
+  push:
+    branches:
       - hexo
 jobs:
   build-and-deploy:
@@ -11,9 +11,10 @@ jobs:
       uses: actions/checkout@master
 
     - name: Build and Deploy
-      uses: solybum/hexo-deploy@master
+      uses: JamesIves/github-pages-deploy-action@master
       env:
-        PERSONAL_TOKEN: ${{ secrets.HEXO_TOKEN }}
-        PUBLISH_REPOSITORY: aotxland/aotxland.github.io # The repository the action should deploy to.
-        BRANCH: master  # The branch the action should deploy to.
-        PUBLISH_DIR: ./public # The folder the action should deploy.
+        ACCESS_TOKEN: ${{ secrets.HEXO_TOKEN }}
+        BASE_BRANCH: dev
+        BRANCH: master
+        FOLDER: public
+        BUILD_SCRIPT: npm i -g hexo && npm install && hexo generate
